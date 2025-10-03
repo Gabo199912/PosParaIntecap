@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PosParaIntecap</string>
+    <string-array name="OPCIONES">
+        <item>VENDEDOR</item>
+        <item>ADMINISTRADOR</item>
+    </string-array>
 </resources>

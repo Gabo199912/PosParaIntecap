@@ -15,6 +15,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
 
             android:text="LOGGIN INTECAP"
             android:textColor="@color/white"
@@ -43,7 +45,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txUsuario"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="73dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         app:boxCornerRadiusTopStart="16dp"
@@ -55,7 +57,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txUsuarioTexto"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="66dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +66,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txContrasenia"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="73dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         app:boxCornerRadiusTopStart="16dp"
@@ -76,7 +78,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txContraseniaTexto"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="66dp"
             android:inputType="textPassword"
             />
 
@@ -102,6 +104,9 @@
     <TextView
         android:id="@+id/txtMensajeLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif"
+        android:textSize="25sp"/>
 
 </LinearLayout>

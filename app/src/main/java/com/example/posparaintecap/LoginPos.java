@@ -1,12 +1,10 @@
 package com.example.posparaintecap;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -16,11 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.posparaintecap.Modelos.LoginModelo;
-import com.example.posparaintecap.Retro.LoginCliente;
-import com.example.posparaintecap.Retro.LoginServicio;
+import com.example.posparaintecap.Retro.UsuarioCliente;
+import com.example.posparaintecap.Retro.UsuarioServicio;
 import com.example.posparaintecap.TokenSingleton.GuardarTokenSingleton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,8 +48,6 @@ public class LoginPos extends AppCompatActivity {
         loginBoton = findViewById(R.id.loginBoton);
 
 
-
-
         loginBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +57,7 @@ public class LoginPos extends AppCompatActivity {
                 loginPos.setContrasenia_hash(contrasenia);
 
 
-                LoginServicio loginServicio = LoginCliente.getRetrofit().create(LoginServicio.class);
+                UsuarioServicio loginServicio = UsuarioCliente.getRetrofit().create(UsuarioServicio.class);
                 Call<LoginModelo> call = loginServicio.login(loginPos);
 
                 Log.d("LO QUE SE ENVIA", "HACIA EL SERVIDOR:" + usuario);
@@ -72,9 +67,12 @@ public class LoginPos extends AppCompatActivity {
                     public void onResponse(Call<LoginModelo> call, Response<LoginModelo> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             LoginModelo loginResponse = response.body();
-                            txtMensajeLogin.setText(loginResponse.getNombre_usuario()+ " " + loginResponse.getMensaje() + " " + loginResponse.getToken());
+                            txtMensajeLogin.setText("BIENVENIDO: " + loginResponse.getNombre_usuario().toUpperCase() );
 
                             GuardarTokenSingleton.setToken(loginResponse.getToken());
+
+                            Intent intent = new Intent(LoginPos.this, UsuariosCRUD.class);
+                            startActivity(intent);
 
                             Log.d("RESPUESTA", "Respuesta del servidor true: " + response.code());
                         } else {
