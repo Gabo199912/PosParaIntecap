@@ -1,6 +1,8 @@
 package com.example.posparaintecap.Modelos;
 
 public class UsuarioModelo {
+
+    private int id_usuario;
     private String nombre;
     private String nombre_usuario;
     private String email;
@@ -10,6 +12,22 @@ public class UsuarioModelo {
     public UsuarioModelo() {
     }
 
+    public UsuarioModelo(int id_usuario, String nombre, String nombre_usuario, String email, String contrasenia_hash, String tipo_usuario) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.nombre_usuario = nombre_usuario;
+        this.email = email;
+        this.contrasenia_hash = contrasenia_hash;
+        this.tipo_usuario = tipo_usuario;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 
     public String getNombre() {
         return nombre;

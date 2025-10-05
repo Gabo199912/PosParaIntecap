@@ -18,6 +18,7 @@ import com.example.posparaintecap.Retro.UsuarioCliente;
 import com.example.posparaintecap.Retro.UsuarioServicio;
 import com.example.posparaintecap.TokenSingleton.GuardarTokenSingleton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,28 +58,27 @@ public class LoginPos extends AppCompatActivity {
                 loginPos.setContrasenia_hash(contrasenia);
 
 
+
                 UsuarioServicio loginServicio = UsuarioCliente.getRetrofit().create(UsuarioServicio.class);
                 Call<LoginModelo> call = loginServicio.login(loginPos);
 
-                Log.d("LO QUE SE ENVIA", "HACIA EL SERVIDOR:" + usuario);
-                Log.d("LO QUE SE ENVIA", "HACIA EL SERVIDOR:" + contrasenia);
                 call.enqueue(new Callback<LoginModelo>() {
                     @Override
                     public void onResponse(Call<LoginModelo> call, Response<LoginModelo> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            LoginModelo loginResponse = response.body();
-                            txtMensajeLogin.setText("BIENVENIDO: " + loginResponse.getNombre_usuario().toUpperCase() );
+                            if (response.isSuccessful() && response.body() != null) {
+                                LoginModelo loginResponse = response.body();
+                                txtMensajeLogin.setText("BIENVENIDO: " + loginResponse.getNombre_usuario().toUpperCase() );
 
-                            GuardarTokenSingleton.setToken(loginResponse.getToken());
+                                GuardarTokenSingleton.setToken(loginResponse.getToken());
 
-                            Intent intent = new Intent(LoginPos.this, UsuariosCRUD.class);
-                            startActivity(intent);
+                                Intent intent = new Intent(LoginPos.this, UsuariosCRUD.class);
+                                startActivity(intent);
 
-                            Log.d("RESPUESTA", "Respuesta del servidor true: " + response.code());
-                        } else {
-                            txtMensajeLogin.setText("Error en la respuesta del servidor");
-                            Log.d("RESPUESTA", "Respuesta del servidor else: " + response.code());
-                        }
+                                Log.d("RESPUESTA", "Respuesta del servidor true: " + response.code());
+                            } else {
+                                txtMensajeLogin.setText("Error en la respuesta del servidor");
+                                Log.d("RESPUESTA", "Respuesta del servidor else: " + response.code());
+                            }
                     }
 
                     @Override
